@@ -1,0 +1,8 @@
+%h1 All Articles
+%section
+  - @articles.each do |article|
+    %article
+      %h2
+        = article.title
+      %div
+        = raw(article.body)

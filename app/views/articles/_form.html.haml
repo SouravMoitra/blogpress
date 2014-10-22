@@ -1,0 +1,9 @@
+%h1 Article Editor
+= form_for(@article) do |f|
+  %p
+    = f.label "Title"
+    = f.text_field :title, class: "form-field", required: true
+  %p
+    = f.label "Body"
+    = f.cktext_area :body, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'full'}
+  = f.submit
