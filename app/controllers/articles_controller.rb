@@ -1,12 +1,13 @@
 class ArticlesController < ApplicationController
 
   before_action :user_signed_in, except: [:index, :show]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     if params[:tag]
       @articles = Article.tagged_with(params[:tag])
     else
-      @articles = Article.all.order("created_at DESC")
+      @articles = Article.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
     end
   end
 
@@ -26,11 +27,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       flash[:success] = "Article updated"
       redirect_to @article
@@ -40,7 +39,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    article = Article.find(params[:id])
     article.destroy
     flash[:info] = "Article deleted"
     redirect_to articles_url
@@ -48,7 +46,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.friendly.find(params[:id])
-    @comments = @article.comments.all.order("created_at")
+    @comments = @article.comments.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
   end
 
   private
@@ -57,5 +55,11 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :tag_list)
   end
 
-
+  def check_user
+    @article = Article.friendly.find(params[:id])
+    unless @article.user == current_user
+      flash[:danger] = "You dont have permission to edit/destroy"
+      redirect_to @article
+    end
+  end
 end

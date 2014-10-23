@@ -1,16 +1,25 @@
 %h1 All Articles
-.tag_cloud
+#tag_cloud
   - tag_cloud Article.tag_counts, %w[s m l] do |tag, css_class|
     = link_to tag.name, tag_path(tag.name), class: css_class
 %section
+  .flickr_pagination
+    = will_paginate @articles
   - @articles.each do |article|
     %article
       %h2
-        = article.title
+        = link_to article.title, article, class: "art-heading"
       %div
         %p
-          %small
-            = article.created_at
-            = article.user.personal.name
-        = raw(article.body)
+          %div.clearfix
+            %span.art-meta
+              = article.created_at.to_formatted_s
+            %span.art-meta
+              - if article.user.try(:personal)
+                = article.user.personal.name
+              - else
+                = "Anonymous"
+        = simple_format(article.body.truncate(600))
         = raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+  .flickr_pagination
+    = will_paginate @articles
