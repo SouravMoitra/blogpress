@@ -3,7 +3,11 @@ class ArticlesController < ApplicationController
   before_action :user_signed_in, except: [:index, :show]
 
   def index
-    @articles = Article.all.order("created_at DESC")
+    if params[:tag]
+      @articles = Article.tagged_with(params[:tag])
+    else
+      @articles = Article.all.order("created_at DESC")
+    end
   end
 
   def new
@@ -43,13 +47,13 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.friendly.find(params[:id])
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :tag_list)
   end
 
   def user_signed_in

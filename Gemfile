@@ -47,6 +47,8 @@ gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'will_paginate'
+gem 'friendly_id', '~> 5.0.0'
+gem 'acts-as-taggable-on'
 
 group :production do
   gem 'rails_12factor'
