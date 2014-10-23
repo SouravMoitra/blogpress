@@ -48,6 +48,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.friendly.find(params[:id])
+    @comments = @article.comments.all.order("created_at")
   end
 
   private
@@ -56,10 +57,5 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :tag_list)
   end
 
-  def user_signed_in
-    unless user_signed_in?
-      flash[:error] = "Sign in first"
-      redirect_to root_url
-    end
-  end
+
 end

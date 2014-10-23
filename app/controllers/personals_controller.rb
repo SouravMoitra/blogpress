@@ -50,11 +50,4 @@ class PersonalsController < ApplicationController
   def personal_params
     params.require(:personal).permit(:name, :description)
   end
-
-  def user_signed_in
-    unless user_signed_in?
-      flash[:error] = "Sign in first"
-      redirect_to root_url
-    end
-  end
 end

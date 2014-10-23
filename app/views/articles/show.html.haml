@@ -2,3 +2,21 @@
   = @article.title
 %article
   = raw(@article.body)
+  .comments
+    - @comments.each do |comment|
+      .comment
+        - if comment.user.try(:personal)
+          %span #{comment.user.personal.name} :
+        - else
+          %span Anonymous :
+        = comment.body
+        .time
+          = time_ago_in_words(comment.created_at) + " ago"
+        - if comment.user == current_user || @article.user == current_user
+          = link_to :delete, article_comment_path(@article.id, comment.id), method: :delete, data: {confirm: "Are you sure to delete comment"}
+  = form_for([@article, @article.comments.build]) do |f|
+    %p
+      = f.label "post comment"
+      = f.text_area :body, class: "form-control", required: true
+    %p
+      = f.submit
