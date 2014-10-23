@@ -1,3 +1,4 @@
+- content_for :head, auto_discovery_link_tag(:atom, articles_url(format: :atom)), class: "feeder"
 %h1 All Articles
 #tag_cloud
   - tag_cloud Article.tag_counts, %w[s m l] do |tag, css_class|
