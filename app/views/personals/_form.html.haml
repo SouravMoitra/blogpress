@@ -1,0 +1,10 @@
+%h1 About yourself
+= form_for(@personal) do |f|
+  %p
+    = f.label 'Name'
+    = f.text_field :name, class: "form-control", required: true
+  %p
+    = f.label 'Description'
+    =f.text_area :description, class: "form-control", required: true
+
+  = f.submit "Submit", class: "btn btn-primary"
