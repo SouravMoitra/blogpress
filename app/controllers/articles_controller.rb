@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
 
   before_action :user_signed_in, except: [:index, :show]
   before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :author_signin_status, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     if params[:tag]
