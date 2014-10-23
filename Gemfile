@@ -46,3 +46,12 @@ gem 'autoprefixer-rails'
 gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'will_paginate'
+
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
+
+
+ruby "2.1.3"
