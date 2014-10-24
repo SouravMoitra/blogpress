@@ -10,6 +10,9 @@
     - else
       = "Anonymous"
   = raw(@article.body)
+  .tag-list
+    Tags: 
+    = raw @article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
   - if user_signed_in? && is_author? && @article.user == current_user
     = link_to :edit, edit_article_path(@article), class: "btn btn-primary btn-sm"
     = link_to :delete, @article, method: :delete,data: {confirm: "Are you sure to delete"}, class: "btn btn-danger btn-sm"

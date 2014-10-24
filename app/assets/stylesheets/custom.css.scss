@@ -70,6 +70,15 @@ html {
 			font-size: 16px;
 			#tag_cloud {
 				width: 400px;
+				opacity: 0.7;
+				background-color: #fff;
+				width: 100%;
+				padding: 5px;
+				border: 2px solid #6FEBE7;
+				border-radius: 5px;
+				a {
+					color: #000;
+				}
 				line-height: 1.6em;
 				.s { font-size: 0.8em; }
 				.m { font-size: 1.2em; }
@@ -77,6 +86,7 @@ html {
 			}
 			h1 {
 				color: #F61C08;
+				font-size: 36px;
 			}
 			h2 {
 				padding-left: 10px;
@@ -92,6 +102,9 @@ html {
 				padding: 0 10px;
 				img {
 					max-width: 100%;
+					padding: 4px;
+					background-color: #E4DBDB;
+					border-radius: 5px;
 				}
 			}
 			.art-meta {
@@ -144,9 +157,16 @@ html {
 				.flickr_pagination .next_page {
 					margin-left: 1em;
 				}
-				.comment {
-					color: #B45F04;
-					margin: 10px 15px;
+				.comments {
+					border-top: 1px #fff dashed;
+					margin: 0 15px;
+					.comment {
+						color: #B45F04;
+						margin: 10px 0px;
+						border: 1px #fff dotted	;
+						padding: 5px;
+						border-radius: 5px;
+					}
 				}
 				.white-col {
 					color: #FFF;
@@ -165,6 +185,11 @@ html {
 				ul, ol {
 					margin-left: 20px;
 					padding-left: 15px;
+				}
+				.tag-list {
+					margin: 0 10px;
+					padding: 10px;
+					color: #FF0000;
 				}
 		}
 	}
