@@ -162,6 +162,9 @@ html {
 					border-bottom: 1px #fff dashed;
 					text-transform: capitalize;
 				}
+				ul, ol {
+					margin-left: 20px;
+				}
 		}
 	}
 	@media (max-width: 992px) {
