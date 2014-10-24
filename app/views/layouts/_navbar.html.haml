@@ -15,6 +15,9 @@
       %a.navbar-brand{:href => "/"} BlogPress
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
+        -if user_signed_in? && is_author?
+          %li
+            = link_to "New article", new_article_path
         %li
           = link_to image_tag("feed.png"), articles_url(format: :atom)
         %li
@@ -25,4 +28,6 @@
           %a{:href => "/about"} About
         - if user_signed_in?
           %li
-            =link_to "Sign out",  destroy_user_session_path, method: "delete", data: {confirm: "Are you sure to sign out ?"}
+            = link_to "Edit pass", edit_user_registration_path
+          %li
+            = link_to "Sign out",  destroy_user_session_path, method: "delete", data: {confirm: "Are you sure to sign out ?"}
