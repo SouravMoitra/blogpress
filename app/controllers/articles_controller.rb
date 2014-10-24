@@ -50,6 +50,13 @@ class ArticlesController < ApplicationController
     @comments = @article.comments.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
   end
 
+  def search
+    @search = Article.search do
+      fulltext params[:search]
+    end
+    @articles = @search.results
+  end
+
   private
 
   def article_params

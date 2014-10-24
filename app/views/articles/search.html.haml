@@ -1,0 +1,20 @@
+%h1 Search
+%section
+  %h2 Search results
+  %p #{@articles.count} results found
+  - @articles.each do |article|
+    %article
+      %h2
+        = link_to article.title, article, class: "art-heading"
+      %div
+        %p
+          %div.clearfix
+            %span.art-meta
+              = article.created_at.to_formatted_s
+            %span.art-meta
+              - if article.user.try(:personal)
+                = article.user.personal.name
+              - else
+                = "Anonymous"
+        = simple_format(article.body.truncate(600))
+        = raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')

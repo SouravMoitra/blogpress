@@ -49,6 +49,8 @@ gem 'mini_magick'
 gem 'will_paginate'
 gem 'friendly_id', '~> 5.0.0'
 gem 'acts-as-taggable-on'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 group :production do
   gem 'rails_12factor'
