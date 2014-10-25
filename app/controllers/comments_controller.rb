@@ -6,14 +6,22 @@ class CommentsController < ApplicationController
     @comment = @article.comments.build(comment_params)
     @comment.user = current_user
     @comment.save
-    redirect_to article_path(@article)
+    @comments = @article.comments.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.js
+    end
   end
 
   def destroy
     @article = Article.friendly.find(params[:article_id])
     comment = @article.comments.find(params[:id])
     comment.destroy
-    redirect_to @article
+    @comments = @article.comments.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.js
+    end
   end
 
   private

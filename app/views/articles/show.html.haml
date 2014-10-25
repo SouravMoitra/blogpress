@@ -17,21 +17,11 @@
   - if user_signed_in? && is_author? && @article.user == current_user
     = link_to :edit, edit_article_path(@article), class: "btn btn-primary btn-sm"
     = link_to :delete, @article, method: :delete,data: {confirm: "Are you sure to delete"}, class: "btn btn-danger btn-sm"
-  .comments
+  .comments#comment
     %h3 Comments
-    - @comments.each do |comment|
-      .comment
-        - if comment.user.try(:personal)
-          %span.white-col #{comment.user.personal.name} :
-        - else
-          %span.white-col Anonymous :
-        = comment.body
-        .time
-          = time_ago_in_words(comment.created_at) + " ago"
-        - if comment.user == current_user || @article.user == current_user
-          = link_to :delete, article_comment_path(@article.id, comment.id), method: :delete, data: {confirm: "Are you sure to delete comment"}
+    = render "comment"
   = will_paginate @comments
-  = form_for([@article, @article.comments.build]) do |f|
+  = form_for([@article, @article.comments.build], remote: true) do |f|
     %p
       = f.label "post comment"
       = f.text_area :body, class: "form-control", required: true

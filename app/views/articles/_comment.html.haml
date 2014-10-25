@@ -1,0 +1,11 @@
+- @comments.each do |comment|
+  .comment
+    - if comment.user.try(:personal)
+      %span.white-col #{comment.user.personal.name} :
+    - else
+      %span.white-col Anonymous :
+    = comment.body
+    .time
+      = time_ago_in_words(comment.created_at) + " ago"
+    - if comment.user == current_user || @article.user == current_user
+      = link_to :delete, article_comment_path(@article.id, comment.id), method: :delete, data: {confirm: "Are you sure to delete comment", remote: true}
