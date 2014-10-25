@@ -22,16 +22,24 @@ class PersonalsController < ApplicationController
 
   def edit
     @personal = Personal.find(params[:id])
+    unless current_user === @personal.user
+      flash[:danger] = "Hey stop there dont try to edit others profiles"
+      redirect_to @personal
+    end
   end
 
   def update
     @personal = Personal.find(params[:id])
-    if @personal.update!(personal_params)
-      flash[:success] = "Personal updated"
-      redirect_to @personal
+    if current_user != @personal.user
+      flash[:danger] = "Hey stop there dont try to edit others profiles"
     else
-      render 'edit'
+      if @personal.update!(personal_params)
+        flash[:success] = "Personal updated"
+      else
+        render 'edit'
+      end
     end
+    redirect_to @personal
   end
 
   def destroy
