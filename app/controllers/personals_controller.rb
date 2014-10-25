@@ -43,11 +43,12 @@ class PersonalsController < ApplicationController
 
   def show
     @personal = Personal.find(params[:id])
+    @articles = @personal.user.articles.paginate(:page => params[:page], per_page: 5).order("created_at DESC")
   end
 
   private
 
   def personal_params
-    params.require(:personal).permit(:name, :description)
+    params.require(:personal).permit(:name, :description, :pic)
   end
 end

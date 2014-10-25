@@ -6,12 +6,13 @@
     = @article.created_at.to_formatted_s
   %span.art-meta
     - if @article.user.try(:personal)
-      = @article.user.personal.name
+      = image_tag @article.user.personal.pic_url(:thumb), alt: "Profile"
+      = link_to @article.user.personal.name, personal_path(@article.user.personal)
     - else
       = "Anonymous"
   = raw(@article.body)
   .tag-list
-    Tags: 
+    Tags:
     = raw @article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
   - if user_signed_in? && is_author? && @article.user == current_user
     = link_to :edit, edit_article_path(@article), class: "btn btn-primary btn-sm"

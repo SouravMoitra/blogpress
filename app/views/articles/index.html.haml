@@ -17,7 +17,8 @@
               = article.created_at.to_formatted_s
             %span.art-meta
               - if article.user.try(:personal)
-                = article.user.personal.name
+                = image_tag article.user.personal.pic_url(:thumb), alt: "profile"
+                = link_to article.user.personal.name, personal_path(article.user.personal)
               - else
                 = "Anonymous"
         = simple_format(article.body.truncate(600))

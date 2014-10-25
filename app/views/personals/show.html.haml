@@ -1,8 +1,39 @@
 - provide(:title, @personal.name)
-%h1 User Details
-%p
-  = @personal.name
-%p
-  = @personal.user.email
-%p
-  = @personal.description
+%h1 About User
+.personal-details
+  %p
+    = image_tag @personal.pic, width: 100, height: 100, alt: "Profile pic"
+  %p
+    %span.white-col Name:
+    = @personal.name
+  %p
+    %span.white-col Email:
+    = @personal.user.email
+  %p
+    %span.white-col About:
+    %br/
+    = @personal.description
+
+%section
+  %h2 Articles wrtitten by the author
+  .flickr_pagination
+    = will_paginate @articles
+  - @articles.each do |article|
+    %article
+      %h3
+        = link_to article.title, article, class: "art-heading"
+      %div
+        %p
+          %div.clearfix
+            %span.art-meta
+              = article.created_at.to_formatted_s
+            %span.art-meta
+              - if article.user.try(:personal)
+                = image_tag article.user.personal.pic_url(:thumb), alt: "Profile"
+                = link_to article.user.personal.name, personal_path(article.user.personal)
+              - else
+                = "Anonymous"
+        = simple_format(article.body.truncate(600))
+        = raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+  .flickr_pagination
+    = will_paginate @articles

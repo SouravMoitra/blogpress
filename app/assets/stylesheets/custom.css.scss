@@ -92,9 +92,10 @@ html {
 				padding-left: 10px;
 				color: #0346FE;
 			}
-			h3 {
-				padding-left: 15px;
-				color: #298A08;
+			h3 a, h3{
+				color: #FFFF00;
+				text-align: center;
+				text-transform: capitalize;
 			}
 			background-color: #1C1C1C;
 			color: #1CDD19;
@@ -159,7 +160,7 @@ html {
 				}
 				.comments {
 					border-top: 1px #fff dashed;
-					margin: 0 15px;
+					margin: 0 10px;
 					.comment {
 						color: #B45F04;
 						margin: 10px 0px;
@@ -190,6 +191,16 @@ html {
 					margin: 0 10px;
 					padding: 10px;
 					color: #FF0000;
+				}
+				.personal-details {
+					background-color: #0B0B61;
+					width: 100%;
+					border-radius: 5px;
+					padding: 5px;
+					img {
+						margin-top: 20px;
+						float: right;
+					}
 				}
 		}
 	}
