@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025074022) do
+ActiveRecord::Schema.define(version: 20141026032308) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141025074022) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "articlecon"
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
@@ -75,6 +76,15 @@ ActiveRecord::Schema.define(version: 20141025074022) do
   end
 
   add_index "personals", ["user_id"], name: "index_personals_on_user_id", using: :btree
+
+  create_table "ratings", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "rate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["article_id"], name: "index_ratings_on_article_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

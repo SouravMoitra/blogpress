@@ -7,6 +7,9 @@
     = f.label :tag_list, "Tags (separated by commas)"
     = f.text_field :tag_list, class: "form-control"
   %p
+    = f.label "Article Icon"
+    = f.file_field :articlecon, class: "form-control"
+  %p
     = f.label "Body"
-    = f.cktext_area :body, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'full'}
+    = f.cktext_area :body, :cols => 40, :rows => 50, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'full'}
   = f.submit

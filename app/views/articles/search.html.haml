@@ -16,5 +16,6 @@
                 = article.user.personal.name
               - else
                 = "Anonymous"
+        = image_tag article.articlecon, alt: "articleimage", class: "articlecon", width: 70, height: 70 unless article.articlecon.file.nil?
         = simple_format(article.body.truncate(600))
         = raw article.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')

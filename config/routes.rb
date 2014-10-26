@@ -4,13 +4,9 @@ Rails.application.routes.draw do
 	root 'articles#index'
 
   get '/contact' => 'static_pages#contact'
-
   get '/about' => 'static_pages#about'
-
   get '/search' => 'articles#search'
-
   get 'tags/:tag', to: 'articles#index', as: :tag
-
 	resources :articles do
     resources :comments, only: [:create, :destroy]
   end

@@ -10,6 +10,7 @@
       = link_to @article.user.personal.name, personal_path(@article.user.personal)
     - else
       = "Anonymous"
+  = image_tag @article.articlecon, alt: "articleimage", class: "articlecon", width: 70, height: 70 unless @article.articlecon.file.nil?
   = raw(@article.body)
   .tag-list
     Tags:
