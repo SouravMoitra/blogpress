@@ -7,7 +7,7 @@
   .flickr_pagination
     = will_paginate @articles
   - @articles.each do |article|
-    %article
+    %article.article
       %h2
         = link_to article.title, article, class: "art-heading"
       %div

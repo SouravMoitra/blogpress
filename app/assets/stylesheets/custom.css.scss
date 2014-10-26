@@ -159,7 +159,6 @@ html {
 					margin-left: 1em;
 				}
 				.comments {
-					border-top: 1px #fff dashed;
 					margin: 0 10px;
 					.comment {
 						color: #B45F04;
@@ -206,6 +205,14 @@ html {
 					float: left;
 					margin: 4px 4px 0 10px;
 					border-radius: 5px;
+					border: 2px solid #fff;
+				}
+				.article {
+					width: 96%;
+					margin: 10px auto;
+					padding: 5px;
+					background-color: #424242;
+					border-radius: 10px;
 				}
 		}
 	}
